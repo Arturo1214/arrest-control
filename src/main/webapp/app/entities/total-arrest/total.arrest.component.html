@@ -1,0 +1,120 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="arrestControlApp.totalArrest.home.title">Total Arrests</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="row col-12">
+        <div class="col-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="arrestControlApp.totalArrest.startDate" for="field_arrestDateStartDate">Start Date</label>
+                <div class="input-group">
+                    <input id="field_arrestDateStartDate" type="text" class="form-control" name="arrestDateStartDate" ngbDatepicker #arrestDateStartDateDp="ngbDatepicker"
+                           [(ngModel)]="startDate"/>
+                    <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="arrestDateStartDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="arrestControlApp.totalArrest.endDate" for="field_arrestDateEndDate">End Date</label>
+                <div class="input-group">
+                    <input id="field_arrestDateEndDate" type="text" class="form-control" name="arrestDateEndDate" ngbDatepicker #arrestDateEndDateDp="ngbDatepicker"
+                           [(ngModel)]="endDate"/>
+                    <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="arrestDateEndDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="arrestControlApp.totalArrest.showDetail" for="field_showDetail">Show Date</label>
+                <div class="input-group">
+                    <input type="checkbox" class="form-control" name="showDetail" id="field_showDetail"
+                           [(ngModel)]="showDetail"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <button type="button" id="cancel-save" class="btn btn-secondary" (click)="clearSearch()">
+                <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="arrestControlApp.totalArrest.action.clean"
+                >Clean</span>
+            </button>
+
+            <button type="submit" id="save-entity"  class="btn btn-primary" (click)="search()">
+                <fa-icon icon="search"></fa-icon>&nbsp;<span jhiTranslate="arrestControlApp.totalArrest.action.search">Search</span>
+            </button>
+        </div>
+
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="arrests?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.unit">Unit</span></th>
+                <th scope="col" *ngIf="showDetail" ><span jhiTranslate="arrestControlApp.totalArrest.office">Office</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalArrested">Total Arrested</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalPedestrian">Pedestrian</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalPassenger">Passenger</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalDriver">Driver</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalMotorized">Total Motorized</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalVehicle">Vehicle</span></th>
+                <th scope="col" ><span jhiTranslate="arrestControlApp.totalArrest.totalMotorcycle">Motorcycle</span></th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let arrest of arrests">
+                <tr >
+                    <td>{{ arrest.unit?.name }}</td>
+                    <td *ngIf="showDetail"></td>
+                    <td class="font-weight-bold">{{ arrest.totalArrested }}</td>
+                    <td>{{ arrest.totalPedestrian }}</td>
+                    <td>{{ arrest.totalPassenger }}</td>
+                    <td>{{ arrest.totalDriver }}</td>
+                    <td class="font-weight-bold">{{ arrest.totalMotorized }}</td>
+                    <td>{{ arrest.totalVehicle }}</td>
+                    <td>{{ arrest.totalMotorcycle }}</td>
+                </tr>
+
+                <tr  *ngFor="let detail of arrest.detailTotals" >
+                    <td *ngIf="showDetail"></td>
+                    <td *ngIf="showDetail">{{ detail.office?.name }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalArrested }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalPedestrian }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalPassenger }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalDriver }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalMotorized }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalVehicle }}</td>
+                    <td *ngIf="showDetail">{{ detail.totalMotorcycle }}</td>
+                </tr>
+            </tbody>
+            <tfoot style="background: yellowgreen;">
+                <tr>
+                    <td class="font-weight-bold" jhiTranslate="arrestControlApp.totalArrest.detail.title">TOTALS</td>
+                    <td *ngIf="showDetail"></td>
+                    <td class="font-weight-bold">{{ totalArrested }}</td>
+                    <td>{{ totalPedestrian }}</td>
+                    <td>{{ totalPassenger }}</td>
+                    <td>{{ totalDriver }}</td>
+                    <td class="font-weight-bold">{{ totalMotorized }}</td>
+                    <td>{{ totalVehicle }}</td>
+                    <td>{{ totalMotorcycle }}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="arrests?.length === 0">
+        <span jhiTranslate="arrestControlApp.arrest.home.notFound">No arrests found</span>
+    </div>
+
+</div>

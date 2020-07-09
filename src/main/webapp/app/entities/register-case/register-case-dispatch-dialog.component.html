@@ -1,0 +1,93 @@
+<form name="editForm" *ngIf="registerCase" (ngSubmit)="confirmDispatch()" [formGroup]="editForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.dispatch.title">Confirm Dispatch operation</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="cancel()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.registerCase.unit" for="field_unit">Unit</label>
+                    <select class="form-control" id="field_unit" name="unit" formControlName="unitId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; trackBy: trackById">{{ unitOption.name }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('unitId')!.invalid && (editForm.get('unitId')!.dirty || editForm.get('unitId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('unitId')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.registerCase.zone" for="field_zone">Zone</label>
+                    <input type="text" class="form-control" name="zone" id="field_zone"
+                           formControlName="zone"/>
+                    <div *ngIf="editForm.get('zone')!.invalid && (editForm.get('zone')!.dirty || editForm.get('zone')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('zone')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('zone')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.registerCase.acronymPatrol" for="field_acronymPatrol">Acronym Patrol</label>
+                    <input type="text" class="form-control" name="acronymPatrol" id="field_acronymPatrol"
+                           formControlName="acronymPatrol"/>
+                    <div *ngIf="editForm.get('acronymPatrol')!.invalid && (editForm.get('acronymPatrol')!.dirty || editForm.get('acronymPatrol')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('acronymPatrol')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('acronymPatrol')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.registerCase.patrolLeader" for="field_patrolLeader">Patrol Leader</label>
+                    <input type="text" class="form-control" name="patrolLeader" id="field_patrolLeader"
+                           formControlName="patrolLeader"/>
+                    <div *ngIf="editForm.get('patrolLeader')!.invalid && (editForm.get('patrolLeader')!.dirty || editForm.get('patrolLeader')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('patrolLeader')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('patrolLeader')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button id="jhi-confirm-delete-registerCase" type="submit" class="btn btn-danger" [disabled]="editForm.invalid || isSaving">
+            <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.dispatch">Dispatch</span>
+        </button>
+    </div>
+</form>

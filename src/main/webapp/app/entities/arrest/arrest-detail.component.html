@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="arrest">
+            <h2><span jhiTranslate="arrestControlApp.arrest.detail.title">Arrest</span> {{ arrest.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="arrestControlApp.arrest.documentNumber">Document Number</span></dt>
+                <dd>
+                    <span>{{ arrest.documentNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.arrest.fullName">Full Name</span></dt>
+                <dd>
+                    <span>{{ arrest.fullName }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.arrest.description">Description</span></dt>
+                <dd>
+                    <span>{{ arrest.description }}</span>
+                </dd>
+
+                <dt><span jhiTranslate="arrestControlApp.arrest.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'arrestControlApp.ArrestType.' + arrest.type }}">{{ arrest.type }}</span>
+                </dd>
+                <dt *ngIf="arrest.type === 'DRIVER'"><span jhiTranslate="arrestControlApp.arrest.withDriver">with Driver</span></dt>
+                <dd *ngIf="arrest.type === 'DRIVER'">
+                    <span>{{ arrest.withDriver ? 'SI' : 'NO' }}</span>
+                </dd>
+                <dt *ngIf="arrest.type === 'DRIVER'"><span jhiTranslate="arrestControlApp.arrest.vehicleType">Vehicle Type</span></dt>
+                <dd *ngIf="arrest.type === 'DRIVER'">
+                    <span jhiTranslate="{{ 'arrestControlApp.VehicleType.' + arrest.vehicleType }}">{{ arrest.vehicleType }}</span>
+                </dd>
+                <dt *ngIf="arrest.type === 'DRIVER'"><span jhiTranslate="arrestControlApp.arrest.plate">Plate</span></dt>
+                <dd *ngIf="arrest.type === 'DRIVER'">
+                    <span>{{arrest?.plate | uppercase }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.arrest.arrestDate">Arrest Date</span></dt>
+                <dd>
+                    <span>{{arrest.arrestDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.arrest.user">User</span></dt>
+                <dd>
+                    {{arrest.user?.fullName}}
+                </dd>
+
+                <dt><span jhiTranslate="userManagement.telephone">Telephone</span></dt>
+                <dd>{{ arrest.user?.telephone }}</dd>
+
+                <dt><span jhiTranslate="arrestControlApp.arrest.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'arrestControlApp.PaymentStatus.' + arrest.status }}">{{ arrest.status }}</span>
+                </dd>
+
+                <dt *ngIf="arrest.status === 'PAID_OUT'"><span jhiTranslate="arrestControlApp.arrest.depositNumber">Deposit Number</span></dt>
+                <dd *ngIf="arrest.status === 'PAID_OUT'">
+                    <span>{{ arrest.depositNumber }}</span>
+                </dd>
+
+                <dt *ngIf="arrest.status !== 'PENDING'"><span jhiTranslate="arrestControlApp.arrest.stateDescription">State Description</span></dt>
+                <dd *ngIf="arrest.status !== 'PENDING'">
+                    <span>{{ arrest.stateDescription }}</span>
+                </dd>
+
+                <dt><span jhiTranslate="arrestControlApp.arrest.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{arrest.createdDate}}</span>
+                </dd>
+
+                <dt><span jhiTranslate="arrestControlApp.arrest.lastModifiedBy">Last ModifiedBy</span></dt>
+                <dd>
+                    <span>{{arrest.lastModifiedBy}}</span>
+                </dd>
+
+                <dt><span jhiTranslate="arrestControlApp.arrest.lastModifiedDate">LastModified Date</span></dt>
+                <dd>
+                    <span>{{arrest.lastModifiedDate}}</span>
+                </dd>
+
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button *ngIf="viewEdit(arrest.office?.unit)" type="button"
+                    [routerLink]="['/arrest', arrest.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

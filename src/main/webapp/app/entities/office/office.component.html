@@ -1,0 +1,104 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="arrestControlApp.office.home.title">Offices</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-office" [routerLink]="['/office/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="arrestControlApp.office.home.createLabel">
+            Create a new Office
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="offices?.length === 0">
+        <span jhiTranslate="arrestControlApp.office.home.notFound">No offices found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="offices?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col">
+                        <div jhiSortBy="id">
+                            <span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="id" name="id" [(ngModel)]="filter.id"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="name">
+                            <span jhiTranslate="arrestControlApp.office.name">Name</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="name" name="id" [(ngModel)]="filter.name"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="unit.id">
+                            <span jhiTranslate="arrestControlApp.office.unit">Unit</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <select class="form-control" id="field_unit" name="unit" [(ngModel)]="filter.unitId"
+                                    (change)="eventHandler()">
+                                <option value="" jhiTranslate="arrestControlApp.arrest.vehicle.all" >All</option>
+                                <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; ">{{ unitOption.name }}</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let office of offices ;trackBy: trackId">
+                    <td><a [routerLink]="['/office', office.id, 'view']">{{ office.id }}</a></td>
+                    <td>{{ office.name }}</td>
+                    <td>
+                        <div *ngIf="office.unit">
+                            <a [routerLink]="['/unit', office.unit.id , 'view']" >{{ office.unit.name }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/office', office.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/office', office.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(office)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="offices?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

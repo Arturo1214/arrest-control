@@ -1,0 +1,107 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+      {
+        "relationshipName": "office",
+        "otherEntityName": "office",
+        "relationshipType": "many-to-one",
+        "relationshipValidateRules": [
+          "required"
+        ],
+        "otherEntityField": "id",
+        "otherEntityRelationshipName": "arrest"
+      },
+      {
+        "relationshipName": "user",
+        "otherEntityName": "user",
+        "relationshipType": "many-to-one",
+        "relationshipValidateRules": [
+          "required"
+        ],
+        "otherEntityField": "id",
+        "otherEntityRelationshipName": "arrest"
+      },
+      {
+        "relationshipName": "userStatus",
+        "otherEntityName": "user",
+        "relationshipType": "many-to-one",
+        "otherEntityField": "id",
+        "otherEntityRelationshipName": "arrest"
+      }
+    ],
+    "fields": [
+        {
+            "fieldName": "documentNumber",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fullName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+          "fieldName": "type",
+          "fieldType": "ArrestType",
+          "fieldValues": "PEDESTRIAN,DRIVER,PASSENGER",
+          "fieldValidateRules": [
+            "required"
+          ]
+        },
+        {
+          "fieldName": "vehicleType",
+          "fieldType": "VehicleType",
+          "fieldValues": "VEHICLE,MOTORCYCLE"
+        },
+        {
+          "fieldName": "plate",
+          "fieldType": "String"
+        },
+        {
+          "fieldName": "arrestDate",
+          "fieldType": "ZonedDateTime",
+          "fieldValidateRules": [
+            "required"
+          ]
+        },
+        {
+          "fieldName": "status",
+          "fieldType": "PaymentStatus",
+          "fieldValues": "PENDING,PAID_OUT,NO_FINE",
+          "fieldValidateRules": [
+            "required"
+          ]
+        },
+        {
+          "fieldName": "stateDescription",
+          "fieldType": "String"
+        },
+        {
+          "fieldName": "depositNumber",
+          "fieldType": "String"
+        },
+        {
+          "fieldName": "withDriver",
+          "fieldType": "Boolean",
+          "fieldValidateRules": []
+        }
+    ],
+    "changelogDate": "20200401133945",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceClass",
+    "entityTableName": "arrest",
+    "databaseType": "sql",
+    "readOnly": false,
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

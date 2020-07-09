@@ -1,0 +1,10 @@
+{
+  "arrestControlApp": {
+    "StateCase": {
+      "null": "",
+      "DERIVATIVE": "DERIVATIVE",
+      "NEGATIVE": "NEGATIVE",
+      "SOLVED": "SOLVED"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "arrestControlApp": {
+    "typeCase": {
+      "home": {
+        "title": "Tipo De Caso",
+        "createLabel": "Crear nuevo Tipo De Caso",
+        "createOrEditLabel": "Crear o editar Tipo De Caso",
+        "notFound": "Ningún Tipo De Caso encontrado"
+      },
+      "created": "Un nuevo Tipo De Caso ha sido creado con el identificador {{ param }}",
+      "updated": "Un Tipo De Caso ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Tipo De Caso ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tipo De Caso {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo De Caso"
+      },
+      "name": "Nombre"
+    }
+  }
+}

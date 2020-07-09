@@ -1,0 +1,124 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="arrestControlApp.arrest.home.title">Arrests</span>
+
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <form class="row" name="editForm" role="form" novalidate (ngSubmit)="loadAll()" [formGroup]="editForm">
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.arrestDate" for="field_arrestDate">Arrest Date</label>
+                        <div class="input-group">
+                            <input id="field_arrestDate" type="text" class="form-control" name="arrestDate" ngbDatepicker #arrestDateDp="ngbDatepicker" formControlName="arrestDate"/>
+                            <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="arrestDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                    </span>
+                        </div>
+                        <div *ngIf="editForm.get('arrestDate')!.invalid && (editForm.get('arrestDate')!.dirty || editForm.get('arrestDate')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('arrestDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.unit" for="field_unit">Unit</label>
+                        <select [attr.disabled]="!viewUnit() ? 'disabled' : null"  class="form-control" id="field_unit" name="unit" formControlName="unitId">
+                            <option value="" jhiTranslate="arrestControlApp.arrest.vehicle.all" >All</option>
+                            <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; trackBy: trackById">{{ unitOption.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.office" for="field_office">Office</label>
+                        <select class="form-control" id="field_office" name="office" formControlName="officeId">
+                            <option value="" jhiTranslate="arrestControlApp.arrest.vehicle.all" >All</option>
+                            <option [ngValue]="officeOption.id" *ngFor="let officeOption of offices; trackBy: trackById">{{ officeOption.name }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <button type="button" id="cancel-save" class="btn btn-secondary" (click)="clearValues()">
+                        <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="arrestControlApp.totalArrest.action.clean">Clean</span>
+                    </button>
+
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid" class="btn btn-primary">
+                        <fa-icon icon="search"></fa-icon>&nbsp;<span jhiTranslate="arrestControlApp.totalArrest.action.search">Search</span>
+                    </button>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-2">
+                    <span>{{ datePrinting | date:'dd/MM/yy HH:mm:ss'  }}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-responsive" id="entities">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span>#</span></th>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="arrestControlApp.arrest.documentNumber">Document Number</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.fullName">Full Name</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.description">Description</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.type">Type</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.vehicleType">Vehicle Type</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.plate">Plate</span></th>
+                    <th *ngIf="viewUnit()" scope="col"><span jhiTranslate="arrestControlApp.arrest.unit">Unit</span></th>
+                    <th scope="col">
+                        <span jhiTranslate="arrestControlApp.arrest.office">Office</span>
+                    </th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.user">User</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.arrestDate">Arrest Date</span></th>
+                    <th scope="col"><span jhiTranslate="arrestControlApp.arrest.createdDate">Created Date</span></th>
+                    <th scope="col">
+                        <span jhiTranslate="arrestControlApp.arrest.status">Status</span>
+                    </th>
+                    <th scope="col">
+                        <span jhiTranslate="arrestControlApp.arrest.depositNumber">Deposit Number</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let arrest of arrests ; let i = index ;trackBy: trackId">
+                    <th>{{ i + 1 }}</th>
+                    <td><a [routerLink]="['/arrest', arrest.id, 'view']">{{ arrest.id }}</a></td>
+                    <td>{{ arrest.documentNumber }}</td>
+                    <td>{{ arrest.fullName }}</td>
+                    <td>{{ arrest.description }}</td>
+                    <td jhiTranslate="{{ 'arrestControlApp.ArrestType.' + arrest.type }}">{{ arrest.type }}</td>
+                    <td jhiTranslate="{{ 'arrestControlApp.VehicleType.' + arrest.vehicleType }}">{{ arrest.vehicleType }}</td>
+                    <td>{{ arrest.plate | uppercase  }}</td>
+                    <td *ngIf="viewUnit()">{{ arrest.office?.unit?.name }}</td>
+                    <td>
+                        {{ arrest.office?.name }}
+                    </td>
+                    <td>
+                        {{ arrest.user?.fullName }}
+                    </td>
+                    <td>{{ arrest.arrestDate | date:'dd/MM/yy HH:mm' }}</td>
+                    <td>{{ arrest.createdDate | date:'dd/MM/yy HH:mm' }}</td>
+                    <td jhiTranslate="{{ 'arrestControlApp.PaymentStatus.' + arrest.status }}">{{ arrest.status }}</td>
+                    <td>{{ arrest.depositNumber }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="arrests?.length === 0">
+        <span jhiTranslate="arrestControlApp.arrest.home.notFound">No arrests found</span>
+    </div>
+
+</div>

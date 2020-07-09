@@ -1,0 +1,38 @@
+{
+  "arrestControlApp": {
+    "totalArrest": {
+      "home": {
+        "title": "Total Arrestados",
+        "createLabel": "Crear nuevo Arrestado",
+        "createOrEditLabel": "Crear o editar Arrestado",
+        "notFound": "Ningún Arrestados encontrado"
+      },
+      "created": "Un nuevo Arrestado ha sido creado con el identificador {{ param }}",
+      "updated": "Un Arrestado ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Arrestado ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Arrestado {{ id }}?"
+      },
+      "detail": {
+        "title": "TOTALES"
+      },
+      "action": {
+        "search": "Buscar",
+        "clean": "Limpiar"
+      },
+      "startDate": "Fecha Inicio",
+      "endDate": "Fecha Fin",
+      "showDetail": "Mostrar Detalle",
+      "unit": "Unidad",
+      "office": "Oficina",
+      "totalArrested": "Total Personas Arrestadas",
+      "totalPedestrian": "Peatones",
+      "totalPassenger": "Pasajeros",
+      "totalDriver": "Conductores",
+      "totalMotorized": "Total Motorizados",
+      "totalVehicle": "Vehiculos",
+      "totalMotorcycle": "Motocicletas",
+      "detailTotals": "Detail"
+    }
+  }
+}

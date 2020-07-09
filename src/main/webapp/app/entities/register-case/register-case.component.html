@@ -1,0 +1,138 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="arrestControlApp.registerCase.home.title">Register Cases</span>
+
+        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_DISPATCHER']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-register-case" [routerLink]="['/register-case/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="arrestControlApp.registerCase.home.createLabel">
+            Create a new Register Case
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="registerCases?.length === 0">
+        <span jhiTranslate="arrestControlApp.registerCase.home.notFound">No registerCases found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="registerCases?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"></th>
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="registrationDate"><span jhiTranslate="arrestControlApp.registerCase.registrationDate">Registration Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="address"><span jhiTranslate="arrestControlApp.registerCase.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="typeCase.name"><span jhiTranslate="arrestControlApp.registerCase.typeCase">Type Case</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="informer"><span jhiTranslate="arrestControlApp.registerCase.informer">Informer</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="phone"><span jhiTranslate="arrestControlApp.registerCase.phone">Phone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="description"><span jhiTranslate="arrestControlApp.registerCase.description">Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="state"><span jhiTranslate="arrestControlApp.registerCase.state">State</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="unit.name"><span jhiTranslate="arrestControlApp.registerCase.unit">Unit</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="zone"><span jhiTranslate="arrestControlApp.registerCase.zone">Zone</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="acronymPatrol"><span jhiTranslate="arrestControlApp.registerCase.acronymPatrol">Acronym Patrol</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="patrolLeader"><span jhiTranslate="arrestControlApp.registerCase.patrolLeader">Patrol Leader</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="supportPatrol"><span jhiTranslate="arrestControlApp.registerCase.supportPatrol">Support Patrol</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="checkDate"><span jhiTranslate="arrestControlApp.registerCase.checkDate">Check Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="stateCase"><span jhiTranslate="arrestControlApp.registerCase.stateCase">State Case</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="descriptionCompletion"><span jhiTranslate="arrestControlApp.registerCase.descriptionCompletion">Description Completion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="receptionist.fullName"><span jhiTranslate="arrestControlApp.registerCase.receptionist">Receptionist</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dispatcher.fullName"><span jhiTranslate="arrestControlApp.registerCase.dispatcher">Dispatcher</span> <fa-icon icon="sort"></fa-icon></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let registerCase of registerCases ;trackBy: trackId">
+                    <td class="text-right">
+
+                        <div class="btn-group">
+                            <div>
+                                <button type="submit"
+                                        [routerLink]="['/register-case', registerCase.id, 'view']"
+                                        class="btn btn-info btn-sm">
+                                    <fa-icon icon="eye"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                                </button>
+                            </div>
+                            <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_RECEPTIONIST', 'ROLE_DISPATCHER']">
+                                <button type="submit" *ngIf="viewEdit(registerCase.state)"
+                                        [routerLink]="['/register-case', registerCase.id, 'edit']"
+                                        class="btn btn-primary btn-sm">
+                                    <fa-icon icon="pencil-alt"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                                </button>
+                            </div>
+
+                            <div  *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_DISPATCHER']">
+                                <button type="submit" (click)="dispatch(registerCase)" *ngIf="viewNotAssigned(registerCase.state)"
+                                        class="btn btn-success btn-sm">
+                                    <fa-icon [icon]="faCheck"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.dispatch">Dispatch</span>
+                                </button>
+                                <button type="submit" (click)="check(registerCase.id)" *ngIf="viewCheck(registerCase.state) && !registerCase.checkDate"
+                                        class="btn btn-success btn-sm">
+                                    <fa-icon [icon]="faUnlock"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.check">Check</span>
+                                </button>
+                                <button type="submit" (click)="finalize(registerCase)" *ngIf="viewPending(registerCase.state) && registerCase.checkDate"
+                                        class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="faUnlock"></fa-icon>
+                                    <span class="d-none d-md-inline" jhiTranslate="entity.action.finalize">Finalize</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td><a [routerLink]="['/register-case', registerCase.id, 'view']">{{ registerCase.id }}</a></td>
+                    <td>{{ registerCase.registrationDate | date:'medium' }}</td>
+                    <td>{{ registerCase.address }}</td>
+                    <td>
+                        <div *ngIf="registerCase.typeCase">
+                            {{ registerCase.typeCase?.name }}
+                        </div>
+                    </td>
+                    <td>{{ registerCase.informer }}</td>
+                    <td>{{ registerCase.phone }}</td>
+                    <td>{{ registerCase.description }}</td>
+                    <td jhiTranslate="{{ 'arrestControlApp.StateRegister.' + registerCase.state }}">{{ registerCase.state }}</td>
+                    <td>
+                        <div *ngIf="registerCase.unit">
+                            {{ registerCase.unit?.name }}
+                        </div>
+                    </td>
+                    <td>{{ registerCase.zone }}</td>
+                    <td>{{ registerCase.acronymPatrol }}</td>
+                    <td>{{ registerCase.patrolLeader }}</td>
+                    <td>{{ registerCase.supportPatrol }}</td>
+                    <td>{{ registerCase.checkDate  | date:'HH:mm:ss'  }}</td>
+                    <td jhiTranslate="{{ 'arrestControlApp.StateCase.' + registerCase.stateCase }}">{{ registerCase.stateCase }}</td>
+                    <td>{{ registerCase.descriptionCompletion }}</td>
+                    <td>
+                        <div *ngIf="registerCase.receptionist">
+                            {{ registerCase.receptionist?.fullName }}
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="registerCase.dispatcher">
+                            {{ registerCase.dispatcher?.fullName }}
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="registerCases?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

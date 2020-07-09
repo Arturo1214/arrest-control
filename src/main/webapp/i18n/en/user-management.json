@@ -1,0 +1,38 @@
+{
+  "userManagement": {
+    "home": {
+      "title": "Users",
+      "createLabel": "Create a new user",
+      "createOrEditLabel": "Create or edit a user"
+    },
+    "created": "A new user is created with identifier {{ param }}",
+    "updated": "A user is updated with identifier {{ param }}",
+    "deleted": "A user is deleted with identifier {{ param }}",
+    "resetPassword": "A user is reset password with identifier {{ param }}",
+    "delete": {
+      "question": "Are you sure you want to delete user {{ login }}?"
+    },
+    "detail": {
+      "title": "User"
+    },
+    "reset": {
+      "title": "Confirm reset password operation",
+      "question": "Are you sure you want to reset password user {{ login }}?",
+      "reset": "Reset Password"
+    },
+    "login": "Login",
+    "fullName": "Full name",
+    "telephone": "Telephone",
+    "email": "Email",
+    "activated": "Activated",
+    "deactivated": "Deactivated",
+    "profiles": "Profiles",
+    "langKey": "Language",
+    "createdBy": "Created by",
+    "createdDate": "Created date",
+    "lastModifiedBy": "Modified by",
+    "lastModifiedDate": "Modified date",
+    "unit": "Unit",
+    "office": "Office"
+  }
+}

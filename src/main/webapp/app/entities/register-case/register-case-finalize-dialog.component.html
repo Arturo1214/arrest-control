@@ -1,0 +1,63 @@
+<form name="editForm" *ngIf="registerCase" (ngSubmit)="confirmFinalize()" [formGroup]="editForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.finalize.title">Confirm finalize operation</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="cancel()">&times;</button>
+    </div>
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.registerCase.stateCase" for="field_stateCase">State Case</label>
+                    <select class="form-control" name="stateCase" formControlName="stateCase" id="field_stateCase">
+                        <option value="DERIVATIVE">{{ 'arrestControlApp.StateCase.DERIVATIVE' | translate }}</option>
+                        <option value="NEGATIVE">{{ 'arrestControlApp.StateCase.NEGATIVE' | translate }}</option>
+                        <option value="SOLVED">{{ 'arrestControlApp.StateCase.SOLVED' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('stateCase')!.invalid && (editForm.get('stateCase')!.dirty || editForm.get('stateCase')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('stateCase')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.registerCase.descriptionCompletion" for="field_descriptionCompletion">Description Completion</label>
+                    <textarea class="form-control" name="descriptionCompletion" id="field_descriptionCompletion"
+                           formControlName="descriptionCompletion"></textarea>
+                    <div *ngIf="editForm.get('descriptionCompletion')!.invalid && (editForm.get('descriptionCompletion')!.dirty || editForm.get('descriptionCompletion')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('descriptionCompletion')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('descriptionCompletion')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1024 }">
+                            This field cannot be longer than 1024 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+            <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button id="jhi-confirm-delete-registerCase" type="submit" class="btn btn-danger" [disabled]="editForm.invalid || isSaving">
+            <fa-icon icon="times"></fa-icon>&nbsp;<span jhiTranslate="entity.action.finalize">Finalize</span>
+        </button>
+    </div>
+</form>

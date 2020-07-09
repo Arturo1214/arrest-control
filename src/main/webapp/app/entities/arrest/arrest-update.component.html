@@ -1,0 +1,146 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-arrest-heading" jhiTranslate="arrestControlApp.arrest.home.createOrEditLabel">Create or edit a Arrest</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.arrestDate" for="field_arrestDate">Arrest Date</label>
+                    <div class="d-flex">
+                        <input [readonly]="!userAdmin && editForm.get('id')!.value" id="field_arrestDate" type="datetime-local" class="form-control" name="arrestDate" formControlName="arrestDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('arrestDate')!.invalid && (editForm.get('arrestDate')!.dirty || editForm.get('arrestDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('arrestDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.get('arrestDate')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.datetimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.documentNumber" for="field_documentNumber">Document Number</label>
+                    <input type="text" class="form-control" name="documentNumber" id="field_documentNumber"
+                           formControlName="documentNumber"/>
+                    <div *ngIf="editForm.get('documentNumber')!.invalid && (editForm.get('documentNumber')!.dirty || editForm.get('documentNumber')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('documentNumber')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('documentNumber')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.fullName" for="field_fullName">Full Name</label>
+                    <input type="text" class="form-control" name="fullName" id="field_fullName"
+                           formControlName="fullName"/>
+                    <div *ngIf="editForm.get('fullName')!.invalid && (editForm.get('fullName')!.dirty || editForm.get('fullName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fullName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fullName')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                    <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                            This field cannot be longer than 255 characters.
+                        </small>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="PEDESTRIAN" jhiTranslate="arrestControlApp.arrest.arrestType.pedestrian">PEDESTRIAN</option>
+                        <option value="DRIVER" jhiTranslate="arrestControlApp.arrest.arrestType.driver">DRIVER</option>
+                        <option value="PASSENGER" jhiTranslate="arrestControlApp.arrest.arrestType.passenger">PASSENGER</option>
+                    </select>
+                    <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('type')?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div *ngIf="editForm.get('type')!.value === 'DRIVER'">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.withDriver" for="field_withDriver">With Driver</label>
+                        <input type="checkbox" class="form-control" name="withDriver" id="field_withDriver"
+                               formControlName="withDriver"/>
+                        <div *ngIf="editForm.get('withDriver')!.invalid && (editForm.get('withDriver')!.dirty || editForm.get('withDriver')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('withDriver')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.vehicleType" for="field_vehicleType">Vehicle Type</label>
+                        <select class="form-control" name="vehicleType" formControlName="vehicleType" id="field_vehicleType">
+                            <option value="VEHICLE" jhiTranslate="arrestControlApp.arrest.vehicle.vehicle">VEHICLE</option>
+                            <option value="MOTORCYCLE" jhiTranslate="arrestControlApp.arrest.vehicle.motorcycle">MOTORCYCLE</option>
+                        </select>
+                        <div *ngIf="editForm.get('vehicleType')!.invalid && (editForm.get('vehicleType')!.dirty || editForm.get('vehicleType')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('vehicleType')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="arrestControlApp.arrest.plate" for="field_plate">Plate</label>
+                        <input type="text" class="form-control" name="plate" id="field_plate"
+                               formControlName="plate"/>
+                        <div *ngIf="editForm.get('plate')!.invalid && (editForm.get('plate')!.dirty || editForm.get('plate')!.touched)">
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('plate')?.errors?.required" jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   *ngIf="editForm.get('plate')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                                This field cannot be longer than 255 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

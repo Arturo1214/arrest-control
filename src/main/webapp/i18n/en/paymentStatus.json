@@ -1,0 +1,11 @@
+{
+  "arrestControlApp": {
+    "PaymentStatus": {
+      "null": "",
+      "all": "All",
+      "PENDING": "Pending",
+      "PAID_OUT": "Paid Out",
+      "NO_FINE": "No Fine"
+    }
+  }
+}

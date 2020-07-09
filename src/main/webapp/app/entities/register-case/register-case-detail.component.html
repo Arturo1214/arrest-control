@@ -1,0 +1,105 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="registerCase">
+            <h2><span jhiTranslate="arrestControlApp.registerCase.detail.title">Register Case</span> {{ registerCase.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="arrestControlApp.registerCase.registrationDate">Registration Date</span></dt>
+                <dd>
+                    <span>{{ registerCase.registrationDate  | date:'medium'  }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.address">Address</span></dt>
+                <dd>
+                    <span>{{ registerCase.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.typeCase">Type Case</span></dt>
+                <dd>
+                    <div *ngIf="registerCase.typeCase">
+                        {{ registerCase.typeCase?.name }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.informer">Informer</span></dt>
+                <dd>
+                    <span>{{ registerCase.informer }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.phone">Phone</span></dt>
+                <dd>
+                    <span>{{ registerCase.phone }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.description">Description</span></dt>
+                <dd>
+                    <span>{{ registerCase.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.state">State</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'arrestControlApp.StateRegister.' + registerCase.state }}">{{ registerCase.state }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.unit">Unit</span></dt>
+                <dd>
+                    <div *ngIf="registerCase.unit">
+                        {{ registerCase.unit?.name }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.zone">Zone</span></dt>
+                <dd>
+                    <span>{{ registerCase.zone }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.acronymPatrol">Acronym Patrol</span></dt>
+                <dd>
+                    <span>{{ registerCase.acronymPatrol }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.patrolLeader">Patrol Leader</span></dt>
+                <dd>
+                    <span>{{ registerCase.patrolLeader }}</span>
+                </dd>
+
+
+                <dt><span jhiTranslate="arrestControlApp.registerCase.supportPatrol">Support Patrol</span></dt>
+                <dd>
+                    <span>{{ registerCase.supportPatrol }}</span>
+                </dd>
+
+                <dt><span jhiTranslate="arrestControlApp.registerCase.checkDate">Check Date</span></dt>
+                <dd>
+                    <span>{{ registerCase.checkDate  | date:'HH:mm:ss'  }}</span>
+                </dd>
+
+
+                <dt><span jhiTranslate="arrestControlApp.registerCase.stateCase">State Case</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'arrestControlApp.StateCase.' + registerCase.stateCase }}">{{ registerCase.stateCase }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.descriptionCompletion">Description Completion</span></dt>
+                <dd>
+                    <span>{{ registerCase.descriptionCompletion }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.receptionist">Receptionist</span></dt>
+                <dd>
+                    {{ registerCase.receptionist?.fullName }}
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.registerCase.dispatcher">Dispatcher</span></dt>
+                <dd>
+                    <div *ngIf="registerCase.dispatcher">
+                        {{ registerCase.dispatcher?.fullName }}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button" *ngIf="registerCase.state === notAssigned"
+                    [routerLink]="['/register-case', registerCase.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

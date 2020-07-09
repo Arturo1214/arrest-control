@@ -1,0 +1,67 @@
+{
+  "arrestControlApp": {
+    "arrest": {
+      "home": {
+        "title": "Arrestados",
+        "createLabel": "Crear nuevo Arrestado",
+        "createOrEditLabel": "Crear o editar Arrestado",
+        "notFound": "Ningún Arrestados encontrado",
+        "noFine": "Arrestado Sin Multa"
+      },
+      "created": "Un nuevo Arrestado ha sido creado con el identificador {{ param }}",
+      "updated": "Un Arrestado ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Arrestado ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Arrestado {{ id }}?"
+      },
+      "noFine": {
+        "title": "Confirmar arrestado sin multa"
+      },
+      "paidOut": {
+        "title": "Confirmar pago de multa"
+      },
+      "pending": {
+        "title": "Confirmar cambio a Pendiente",
+        "question": "¿Seguro que quiere cambiar a Pendiente Arrestado {{ id }}?"
+      },
+      "detail": {
+        "title": "Arrestado"
+      },
+      "action": {
+        "noFine": "Sin Multa",
+        "paidOut": "Pago de Multa",
+        "pending": "Marcar Pendiente"
+      },
+      "documentNumber": "Numero Documento",
+      "fullName": "Nombre Completo",
+      "description": "Nota",
+      "type": "Tipo Arresto",
+      "vehicleType": "Tipo Motorizados",
+      "plate": "Placa",
+      "arrestDate": "Fecha de Arresto",
+      "status": "Estado Pago",
+      "stateDescription": "Descripcion de Pago",
+      "depositNumber": "Numero de Deposito",
+      "userStatus": "Usuario Registro Pago",
+      "createdBy": "Registrado Por",
+      "createdDate": "Fecha de Registro",
+      "lastModifiedBy": "Modificaco Por",
+      "lastModifiedDate": "Fecha de Modificacion",
+      "user": "Registrado Por",
+      "unit": "Unidad",
+      "office": "Oficina",
+      "arrestType": {
+        "all": "Todos",
+        "pedestrian": "Peaton",
+        "driver": "Conductor",
+        "passenger": "Pasajero"
+      },
+      "vehicle": {
+        "all": "Todos",
+        "vehicle": "Vehiculo",
+        "motorcycle": "Motocicleta"
+      },
+      "withDriver": "Con conductor"
+    }
+  }
+}

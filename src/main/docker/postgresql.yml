@@ -1,0 +1,11 @@
+version: '2'
+services:
+  arrestcontrol-postgresql:
+    image: postgres:12.1
+    # volumes:
+    #     - ~/volumes/jhipster/ArrestControl/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=ArrestControl
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432

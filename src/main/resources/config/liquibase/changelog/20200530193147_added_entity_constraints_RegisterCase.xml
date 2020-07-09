@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity RegisterCase.
+    -->
+    <changeSet id="20200530193147-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="receptionist_id"
+                                 baseTableName="register_case"
+                                 constraintName="fk_register_case_receptionist_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="unit_id"
+                                 baseTableName="register_case"
+                                 constraintName="fk_register_case_unit_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="unit"/>
+
+        <addForeignKeyConstraint baseColumnNames="dispatcher_id"
+                                 baseTableName="register_case"
+                                 constraintName="fk_register_case_dispatcher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_case_id"
+                                 baseTableName="register_case"
+                                 constraintName="fk_register_case_type_case_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_case"/>
+
+    </changeSet>
+</databaseChangeLog>

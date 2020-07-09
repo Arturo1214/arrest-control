@@ -1,0 +1,19 @@
+/*
+* Bootstrap overrides https://getbootstrap.com/docs/4.0/getting-started/theming/
+* All values defined in bootstrap source
+* https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss can be overwritten here
+* Make sure not to add !default to values here
+*/
+$spacer: 0.75rem !default;
+
+$paragraph-margin-bottom: 0.75rem !default;
+
+$font-size-base: 0.79rem !default;
+
+$table-cell-padding: 0.45rem !default;
+$table-cell-padding-sm: 0.15rem !default;
+
+$form-group-margin-bottom: 0.35rem !default;
+
+$green: #28a745 !default;
+$primary: $green !default;

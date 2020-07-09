@@ -1,0 +1,23 @@
+{
+  "arrestControlApp": {
+    "office": {
+      "home": {
+        "title": "Oficinas",
+        "createLabel": "Crear nuevo Oficina",
+        "createOrEditLabel": "Crear o editar Oficina",
+        "notFound": "Ningún Oficinas encontrado"
+      },
+      "created": "Un nuevo Oficina ha sido creado con el identificador {{ param }}",
+      "updated": "Un Oficina ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Oficina ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Oficina {{ id }}?"
+      },
+      "detail": {
+        "title": "Oficina"
+      },
+      "name": "Nombre",
+      "unit": "Unidad"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Arrest.
+    -->
+    <changeSet id="20200401133945-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="office_id"
+                                 baseTableName="arrest"
+                                 constraintName="fk_arrest_office_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="office"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="arrest"
+                                 constraintName="fk_arrest_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_status_id"
+                                 baseTableName="arrest"
+                                 constraintName="fk_arrest_user_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

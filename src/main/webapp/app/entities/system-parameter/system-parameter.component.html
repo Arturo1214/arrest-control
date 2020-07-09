@@ -1,0 +1,50 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="arrestControlApp.systemParameter.home.title">System Parameters</span>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="systemParameters?.length === 0">
+        <span jhiTranslate="arrestControlApp.systemParameter.home.notFound">No systemParameters found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="systemParameters?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="arrestControlApp.systemParameter.description">Description</span></th>
+                    <th scope="col" ><span jhiTranslate="arrestControlApp.systemParameter.value">Value</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let systemParameter of systemParameters ;trackBy: trackId">
+                    <td><a [routerLink]="['/system-parameter', systemParameter.id, 'view']">{{ systemParameter.id }}</a></td>
+                    <td>{{ systemParameter.description }}</td>
+                    <td>{{ systemParameter.value }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/system-parameter', systemParameter.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/system-parameter', systemParameter.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

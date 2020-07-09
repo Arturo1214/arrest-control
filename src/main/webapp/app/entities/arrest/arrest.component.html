@@ -1,0 +1,239 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="arrestControlApp.arrest.home.title">Arrests</span>
+
+        <input *jhiHasAnyAuthority="'ROLE_ADMIN'" type="checkbox" name="showDetail" id="field_showDetail" class="float-left"
+               style="height: 1em; width: 1em;"
+               [(ngModel)]="showDetail"/>
+
+
+        <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-arrest" [routerLink]="['/arrest/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="arrestControlApp.arrest.home.createLabel">
+            Create a new Arrest
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="table-responsive" id="entities">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col">
+                        <div jhiSortBy="id">
+                            <span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" id="id" name="id" [(ngModel)]="filter.id"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+
+                    <th scope="col" >
+                        <div jhiSortBy="documentNumber">
+                            <span jhiTranslate="arrestControlApp.arrest.documentNumber">Document Number</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="documentNumber" id="field_documentNumber" [(ngModel)]="filter.documentNumber"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="fullName">
+                            <span jhiTranslate="arrestControlApp.arrest.fullName">Full Name</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="fullName" id="field_fullName" [(ngModel)]="filter.fullName"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="description">
+                            <span jhiTranslate="arrestControlApp.arrest.description">Description</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="description" id="field_description" [(ngModel)]="filter.description"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+
+                    <th scope="col">
+                        <div  jhiSortBy="type">
+                            <span jhiTranslate="arrestControlApp.arrest.type">Type</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <select class="form-control" name="type" id="field_type" [(ngModel)]="filter.type"
+                                    (change)="eventHandler()">
+                                <option value="" jhiTranslate="arrestControlApp.arrest.arrestType.all">ALL</option>
+                                <option value="PEDESTRIAN" jhiTranslate="arrestControlApp.arrest.arrestType.pedestrian">PEDESTRIAN</option>
+                                <option value="DRIVER" jhiTranslate="arrestControlApp.arrest.arrestType.driver">DRIVER</option>
+                                <option value="PASSENGER" jhiTranslate="arrestControlApp.arrest.arrestType.passenger">PASSENGER</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="vehicleType">
+                            <span jhiTranslate="arrestControlApp.arrest.vehicleType">Vehicle Type</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <select class="form-control" name="vehicleType" id="field_vehicleType" [(ngModel)]="filter.vehicleType"
+                                    (change)="eventHandler()">
+                                <option value="" jhiTranslate="arrestControlApp.arrest.vehicle.all">ALL</option>
+                                <option value="VEHICLE" jhiTranslate="arrestControlApp.arrest.vehicle.vehicle">VEHICLE</option>
+                                <option value="MOTORCYCLE" jhiTranslate="arrestControlApp.arrest.vehicle.motorcycle">MOTORCYCLE</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="plate">
+                            <span jhiTranslate="arrestControlApp.arrest.plate">Plate</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="plate" id="field_plate" [(ngModel)]="filter.plate"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col"  jhiSortBy="arrestDate"><span jhiTranslate="arrestControlApp.arrest.arrestDate">Arrest Date</span> <fa-icon icon="sort"></fa-icon></th>
+
+                    <th scope="col"  jhiSortBy="user.id">
+                        <div>
+                            <span jhiTranslate="arrestControlApp.arrest.user">User</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="plate" id="field_user" [(ngModel)]="filter.userFullName"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="office.unit.name">
+                            <span jhiTranslate="arrestControlApp.arrest.unit">Unit</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <select class="form-control" id="field_unit" name="unit" [(ngModel)]="filter.unitId"
+                                (change)="eventUnitHandler()">
+                                <option value="" jhiTranslate="arrestControlApp.arrest.vehicle.all" >All</option>
+                                <option [ngValue]="unitOption.id" *ngFor="let unitOption of units; ">{{ unitOption.name }}</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div jhiSortBy="office.name">
+                            <span jhiTranslate="arrestControlApp.arrest.office">Office</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <select class="form-control" id="field_office" name="office" [(ngModel)]="filter.officeId"
+                                    (change)="eventHandler()">
+                                <option value="" jhiTranslate="arrestControlApp.arrest.vehicle.all" >All</option>
+                                <option [ngValue]="officeOption.id" *ngFor="let officeOption of offices; ">{{ officeOption.name }}</option>
+                            </select>
+                        </div>
+                    </th>
+
+                    <th scope="col">
+                        <div  jhiSortBy="status">
+                            <span jhiTranslate="arrestControlApp.arrest.status">Status</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <select class="form-control" name="status" [(ngModel)]="filter.status" id="field_status" (change)="eventHandler()">
+                                <option value="">{{ 'arrestControlApp.PaymentStatus.all' | translate }}</option>
+                                <option value="PENDING">{{ 'arrestControlApp.PaymentStatus.PENDING' | translate }}</option>
+                                <option value="PAID_OUT">{{ 'arrestControlApp.PaymentStatus.PAID_OUT' | translate }}</option>
+                                <option value="NO_FINE">{{ 'arrestControlApp.PaymentStatus.NO_FINE' | translate }}</option>
+                            </select>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="depositNumber">
+                            <span jhiTranslate="arrestControlApp.arrest.depositNumber">Deposit Number</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="depositNumber" id="field_deposit_number" [(ngModel)]="filter.depositNumber"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+                    <th scope="col">
+                        <div  jhiSortBy="stateDescription">
+                            <span jhiTranslate="arrestControlApp.arrest.stateDescription">State Description</span> <fa-icon icon="sort"></fa-icon>
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" name="stateDescription" id="field_state_description" [(ngModel)]="filter.stateDescription"
+                                   (change)="eventHandler()"/>
+                        </div>
+                    </th>
+
+                    <th *ngIf="showDetail" scope="col" jhiSortBy="createdDate"><span jhiTranslate="arrestControlApp.arrest.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th *ngIf="showDetail" scope="col" jhiSortBy="lastModifiedBy"><span jhiTranslate="arrestControlApp.arrest.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th *ngIf="showDetail" scope="col" jhiSortBy="lastModifiedDate"><span jhiTranslate="arrestControlApp.arrest.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody *ngIf="arrests?.length > 0">
+                <tr *ngFor="let arrest of arrests ;trackBy: trackId">
+                    <td><a [routerLink]="['/arrest', arrest.id, 'view']">{{ arrest.id }}</a></td>
+                    <td>{{ arrest.documentNumber }}</td>
+                    <td>{{ arrest.fullName }}</td>
+                    <td>{{ arrest.description }}</td>
+
+                    <td jhiTranslate="{{ 'arrestControlApp.ArrestType.' + arrest.type }}">{{ arrest.type }}</td>
+                    <td jhiTranslate="{{ 'arrestControlApp.VehicleType.' + arrest.vehicleType }}">{{ arrest.vehicleType }}</td>
+
+                    <td>{{arrest.plate | uppercase }}</td>
+                    <td>{{arrest.arrestDate | date:'medium'}}</td>
+
+                    <td>{{ arrest.user?.fullName }}</td>
+                    <td>{{ arrest.office?.unit?.name }}</td>
+                    <td>{{ arrest.office?.name }}</td>
+
+                    <td jhiTranslate="{{ 'arrestControlApp.PaymentStatus.' + arrest.status }}">{{ arrest.status }}</td>
+                    <td>{{ arrest.depositNumber }}</td>
+                    <td>{{ arrest.stateDescription }}</td>
+
+                    <td *ngIf="showDetail">{{ arrest.createdDate | date:'dd/MM/yy HH:mm' }}</td>
+                    <td *ngIf="showDetail">{{ arrest.lastModifiedBy }}</td>
+                    <td *ngIf="showDetail">{{ arrest.lastModifiedDate | date:'dd/MM/yy HH:mm' }}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/arrest', arrest.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button *ngIf="viewEdit(arrest.office?.unit)" type="submit"
+                                    [routerLink]="['/arrest', arrest.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="submit" (click)="delete(arrest)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="alert alert-warning" id="no-result" *ngIf="arrests?.length === 0">
+        <span jhiTranslate="arrestControlApp.arrest.home.notFound">No arrests found</span>
+    </div>
+
+    <div *ngIf="arrests?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

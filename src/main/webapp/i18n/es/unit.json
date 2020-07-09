@@ -1,0 +1,22 @@
+{
+  "arrestControlApp": {
+    "unit": {
+      "home": {
+        "title": "Unidadades",
+        "createLabel": "Crear nuevo Unidad",
+        "createOrEditLabel": "Crear o editar Unidad",
+        "notFound": "Ningún Unidadades encontrado"
+      },
+      "created": "Un nuevo Unidad ha sido creado con el identificador {{ param }}",
+      "updated": "Un Unidad ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Unidad ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Unidad {{ id }}?"
+      },
+      "detail": {
+        "title": "Unidad"
+      },
+      "name": "Nombre"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="systemParameter">
+            <h2><span jhiTranslate="arrestControlApp.systemParameter.detail.title">System Parameter</span> {{ systemParameter.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="arrestControlApp.systemParameter.description">Description</span></dt>
+                <dd>
+                    <span>{{ systemParameter.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.systemParameter.value">Value</span></dt>
+                <dd>
+                    <span>{{ systemParameter.value }}</span>
+                </dd>
+                <dt><span jhiTranslate="arrestControlApp.systemParameter.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'arrestControlApp.TypeSystemParameter.' + systemParameter.type }}">{{ systemParameter.type }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+        </div>
+    </div>
+</div>

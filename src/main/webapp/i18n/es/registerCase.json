@@ -1,0 +1,40 @@
+{
+  "arrestControlApp": {
+    "registerCase": {
+      "home": {
+        "title": "Registro de Casos",
+        "createLabel": "Crear nuevo Caso",
+        "createOrEditLabel": "Crear o editar Caso",
+        "notFound": "Ningún Caso encontrado"
+      },
+      "created": "Un nuevo Caso ha sido creado con el identificador {{ param }}",
+      "updated": "Un Caso ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Caso ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Caso {{ id }}?"
+      },
+      "detail": {
+        "title": "Caso"
+      },
+      "registrationDate": "Fecha y Hora",
+      "address": "Lugar",
+      "typeCase": "Tipo de Hecho",
+      "informer": "Denunciante",
+      "phone": "Telefono",
+      "description": "Detalle",
+      "state": "Estado Llamada",
+      "zone": "Zona",
+      "acronymPatrol": "Patrulla",
+      "patrolLeader": "Jefe de Patrulla",
+      "supportPatrol": "Apoyo",
+      "stateCase": "Estado de Caso",
+      "descriptionCompletion": "Descripcion",
+      "latitude": "Latitud",
+      "longitude": "Lontigud",
+      "receptionist": "Recepcionista",
+      "unit": "Unidad",
+      "dispatcher": "Despachador",
+      "checkDate": "Hora"
+    }
+  }
+}

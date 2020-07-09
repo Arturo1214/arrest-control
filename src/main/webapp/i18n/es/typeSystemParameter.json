@@ -1,0 +1,10 @@
+{
+  "arrestControlApp": {
+    "TypeSystemParameter": {
+      "null": "",
+      "NUMBER": "NUMERO",
+      "TEXT": "TEXTO",
+      "DATE": "FECHA"
+    }
+  }
+}

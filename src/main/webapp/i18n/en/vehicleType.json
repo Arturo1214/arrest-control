@@ -1,0 +1,9 @@
+{
+  "arrestControlApp": {
+    "VehicleType": {
+      "null": "",
+      "VEHICLE": "Vehicle",
+      "MOTORCYCLE": "Motorcycle"
+    }
+  }
+}

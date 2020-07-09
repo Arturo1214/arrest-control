@@ -1,0 +1,38 @@
+{
+  "arrestControlApp": {
+    "totalArrest": {
+      "home": {
+        "title": "Total Arrests",
+        "createLabel": "Create a new Arrest",
+        "createOrEditLabel": "Create or edit a Arrest",
+        "notFound": "No Arrests found"
+      },
+      "created": "A new Arrest is created with identifier {{ param }}",
+      "updated": "A Arrest is updated with identifier {{ param }}",
+      "deleted": "A Arrest is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Arrest {{ id }}?"
+      },
+      "detail": {
+        "title": "TOTALS"
+      },
+      "action": {
+        "search": "Search",
+        "clean": "Clean"
+      },
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "showDetail": "Show Detail",
+      "unit": "Unit",
+      "office": "Office",
+      "totalArrested": "Total Arrested",
+      "totalPedestrian": "Pedestrian",
+      "totalPassenger": "Passenger",
+      "totalDriver": "Driver",
+      "totalMotorized": "Total Motorized",
+      "totalVehicle": "Vehicle",
+      "totalMotorcycle": "Motorcycle",
+      "detailTotals": "Detail"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "arrestControlApp": {
+    "arrest": {
+      "home": {
+        "title": "Arrests",
+        "createLabel": "Create a new Arrest",
+        "createOrEditLabel": "Create or edit a Arrest",
+        "notFound": "No Arrests found",
+        "noFine": "No Fine Arrest"
+      },
+      "created": "A new Arrest is created with identifier {{ param }}",
+      "updated": "A Arrest is updated with identifier {{ param }}",
+      "deleted": "A Arrest is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Arrest {{ id }}?"
+      },
+      "noFine": {
+        "title": "Confirm no fine operation"
+      },
+      "paidOut": {
+        "title": "Confirm paid out operation"
+      },
+      "pending": {
+        "title": "Confirm pending operation",
+        "question": "Are you sure you want to pending Arrest {{ id }}?"
+      },
+      "detail": {
+        "title": "Arrest"
+      },
+      "action": {
+        "noFine": "No Fine",
+        "paidOut": "Paid Out",
+        "pending": "Pending"
+      },
+      "documentNumber": "Document Number",
+      "fullName": "Full Name",
+      "description": "Description",
+      "type": "Arrest Type",
+      "vehicleType": "Motorized Type",
+      "plate": "Plate",
+      "arrestDate": "Arrest Date",
+      "status": "Status Payment",
+      "stateDescription": "State Description",
+      "depositNumber": "Deposit Number",
+      "userStatus": "User Status",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "user": "User By",
+      "unit": "Unit",
+      "office": "Office",
+      "arrestType": {
+        "pedestrian": "Pedestrian",
+        "driver": "Driver",
+        "passenger": "Passenger"
+      },
+      "vehicle": {
+        "all": "All",
+        "vehicle": "Vehicle",
+        "motorcycle": "Motorcycle"
+      },
+      "withDriver": "With Driver"
+    }
+  }
+}

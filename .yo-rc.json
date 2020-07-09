@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "bo.com.ahosoft.arrestcontron",
+      "nativeLanguage": "es"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "monolith",
+    "baseName": "ArrestControl",
+    "packageName": "bo.com.ahosoft.arrestcontron",
+    "packageFolder": "bo/com/ahosoft/arrestcontron",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YzhhOWEzMjkxZDMxNTVkMGU3NzdiMjE5Y2I5MWYzNDBmN2U4ZmU4Nzc4M2Q3YWFlNjVjZWRiZmNhZTMwZjI3NTJkYjIyNmQ5YTNmNTA4NGUxNjY3ZDJmNjkyZTEyNGI4YTE4MjAyNzM5ZGU4NjFkNDk5YWMyYTE2NzM3ZjZiNWY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "journal",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1585505195498,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "es",
+    "languages": ["es", "en"],
+    "blueprints": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "arrestControlApp": {
+    "registerCase": {
+      "home": {
+        "title": "Register Cases",
+        "createLabel": "Create a new Register Case",
+        "createOrEditLabel": "Create or edit a Register Case",
+        "notFound": "No Register Cases found"
+      },
+      "created": "A new Register Case is created with identifier {{ param }}",
+      "updated": "A Register Case is updated with identifier {{ param }}",
+      "deleted": "A Register Case is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Register Case {{ id }}?"
+      },
+      "detail": {
+        "title": "Register Case"
+      },
+      "registrationDate": "Registration Date",
+      "address": "Address",
+      "typeCase": "Type Case",
+      "informer": "Informer",
+      "phone": "Phone",
+      "description": "Description",
+      "state": "State",
+      "zone": "Zone",
+      "acronymPatrol": "Acronym Patrol",
+      "patrolLeader": "Patrol Leader",
+      "supportPatrol": "Support Patrol",
+      "stateCase": "State Case",
+      "descriptionCompletion": "Description Completion",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "receptionist": "Receptionist",
+      "unit": "Unit",
+      "dispatcher": "Dispatcher",
+      "checkDate": "Check Date"
+    }
+  }
+}

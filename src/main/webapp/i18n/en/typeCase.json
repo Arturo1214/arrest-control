@@ -1,0 +1,22 @@
+{
+  "arrestControlApp": {
+    "typeCase": {
+      "home": {
+        "title": "Type Cases",
+        "createLabel": "Create a new Type Case",
+        "createOrEditLabel": "Create or edit a Type Case",
+        "notFound": "No Type Cases found"
+      },
+      "created": "A new Type Case is created with identifier {{ param }}",
+      "updated": "A Type Case is updated with identifier {{ param }}",
+      "deleted": "A Type Case is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Type Case {{ id }}?"
+      },
+      "detail": {
+        "title": "Type Case"
+      },
+      "name": "Name"
+    }
+  }
+}

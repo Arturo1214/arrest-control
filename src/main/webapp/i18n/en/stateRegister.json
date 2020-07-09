@@ -1,0 +1,10 @@
+{
+  "arrestControlApp": {
+    "StateRegister": {
+      "null": "",
+      "NOT_ASSIGNED": "NOT_ASSIGNED",
+      "PENDING": "PENDING",
+      "FINALIZED": "FINALIZED"
+    }
+  }
+}

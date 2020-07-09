@@ -1,0 +1,10 @@
+{
+  "arrestControlApp": {
+    "ArrestType": {
+      "null": "",
+      "PEDESTRIAN": "Pedestrian",
+      "DRIVER": "Driver",
+      "PASSENGER": "Passenger"
+    }
+  }
+}
